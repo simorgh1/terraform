@@ -1,11 +1,6 @@
 #!/bin/sh
 
 # Installs docker and docker-compose if they are missing.
-if ! hash curl 2>/dev/null; then
-    sudo apt-get update -y
-    sudo apt-get install -y curl
-fi
-
 if ! hash docker 2>/dev/null; then        
     sudo curl -fsSL https://get.docker.com | sh -
 fi
