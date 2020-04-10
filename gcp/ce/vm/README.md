@@ -1,38 +1,56 @@
-# Create a virtual machine in gcp instance using terraform
+# Create a virtual machine instance in google cloud using terraform
 
 Required: 
 
-- A google cloud account, if you don't have one yet, create a free [google cloud account](https://cloud.google.com/free/).
+- A google cloud account, if you don't have one yet, create one here: [free Google Cloud account](https://cloud.google.com/free/).
 - Computer Engine API must be enabled
-- Terraform
+- Terraform (is preinstalled in Cloud Shell)
 
-Login to your account and go to cloud shell in the top right corner. terraform should be already installed, you could check it by
+Login to your [account](https://console.cloud.google.com/home/dashboard) console and go to cloud shell placed in the menu bar in the top right corner.
 
-```bash
-$ terraform version
-```
+<div style="text-align: center;">
+    <img src="https://github.com/simorgh1/terraform/raw/master/gcp/ce/vm/img/cloud-shell-menu.jpg">
+</div>
 
 ## What is terraform?
 
 Terraform is a tool for building, changing, and versioning infrastructure safely and efficiently. Terraform can manage existing, popular service providers as well as custom in-house solutions.
 
-You could check the authenticated account
+Terraform should be already installed in the cloud shell environment, you could check it with `terraform version`
+
+You could check the authenticated account which will be used by terraform in order to connect to the Compute Cloud API.
 
 ```bash
 $ gcloud auth list
+Credentialed Accounts
+ACTIVE  ACCOUNT
+*       your@email
+To set the active account, run:
+    $ gcloud config set account `ACCOUNT`
 ```
 
-And the list of projects
+The active project can be listed with:
 
 ```bash
 $ gcloud config list project
+[core]
+project = <your project id>
+
+Your active configuration is: [cloudshell-24816]
 ```
 
 ## Creating the VM configuration file
 
-Start the editor in order to continue creating terraform configuration file. Then create a new file named instance.tf and add the following content into it:
+Open Cloud Shell editor using the menu bar.
 
-```bash
+<div style="text-align: center;">
+    <img src="https://github.com/simorgh1/terraform/raw/master/gcp/ce/vm/img/open-editor-cloud-shell.jpg">
+</div>
+
+Now you could continue in the editor to create the required terraform configuration file. 
+Create a new file named instance.tf and add the following content into it:
+
+```json
 resource "google_compute_instance" "default" {
   project      = "<your project id>"
   name         = "terraform"
@@ -53,7 +71,7 @@ resource "google_compute_instance" "default" {
 }
 ```
 
-Replace the placeholder with your project id retrieved in the previous command. 
+Replace the project if placeholder with your project id retrieved in the previous command. 
 
 ## Initialization
 
@@ -67,14 +85,10 @@ The terraform plan command is used to create an execution plan, enter terraform 
 
 ## Applying the changes
 
-In the current folder where the instance.tf is located enter terraform apply.
+In the current folder where the instance.tf is located enter `terraform apply`.
 
 After that terraform will report the created virtual machine instance.
-You could show the current configuration at any time by using the following command
-
-```bash
-$ terraform show
-```
+You could show the current configuration at any time by using the `terraform show` command
 
 ### Check the created Virtual machine instance in console
 
@@ -83,10 +97,15 @@ You could connect into it using ssh using your google cloud credential in the cu
 
 ### Delete the Virtual machine instance
 
-This could be done by invoking the following command
-
-```bash
-$ terraform destroy
-```
+This could be done by invoking the `terraform destroy` command
 
 This will delete the virtual machine istance and the related resources.
+
+### Summary
+
+Using terraform one could manage resources, in this example we created a new Virtual Machine Instance in the Google Cloud Compute Engine. 
+
+After cnhecking the created vm instance we destroyed it with terraform.
+
+If you want to preserve the current state and follow the [GitOps](https://www.gitops.tech/#what-is-gitops) principles, you should checkin the state file as well, since the current resources are all listed in it.
+If some one else wants to continue using the created resources, terraform initialization will download the required provider plugin and with plan command, the current state will be compared with checked in configuration file, and you are good to go.
