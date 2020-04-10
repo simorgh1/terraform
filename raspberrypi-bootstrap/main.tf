@@ -10,12 +10,12 @@ resource "null_resource" "raspberry_pi_bootstrap" {
     inline = [
       
       # INSTALL Telegraf
-      "curl -fsSL https://raw.githubusercontent.com/simorgh1/terraform/master/rasperrypi-bootstrap/install-telegraf.sh -o install-telegraf.sh",
+      "curl -fsSL https://raw.githubusercontent.com/simorgh1/terraform/master/raspberrypi-bootstrap/install-telegraf.sh -o install-telegraf.sh",
       "chmod +x install-telegraf.sh",
       "sudo ./install-telegraf.sh",
 
       # INSTALL docker 
-      "curl -fsSL https://raw.githubusercontent.com/simorgh1/terraform/master/rasperrypi-bootstrap/install-docker.sh -o install-docker.sh",
+      "curl -fsSL https://raw.githubusercontent.com/simorgh1/terraform/master/raspberrypi-bootstrap/install-docker.sh -o install-docker.sh",
       "chmod +x install-docker.sh",
       "sudo ./install-docker.sh",
       
