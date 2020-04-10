@@ -8,9 +8,7 @@ Required:
 
 Login to your [account](https://console.cloud.google.com/home/dashboard) console and go to cloud shell placed in the menu bar in the top right corner.
 
-<div style="text-align: center;">
-    <img src="https://github.com/simorgh1/terraform/raw/master/gcp/ce/vm/img/cloud-shell-menu.jpg">
-</div>
+![IMAGE](https://github.com/simorgh1/terraform/raw/master/gcp/ce/vm/img/cloud-shell-menu.jpg)
 
 ## What is terraform?
 
@@ -43,14 +41,12 @@ Your active configuration is: [cloudshell-24816]
 
 Open Cloud Shell editor using the menu bar.
 
-<div style="text-align: center;">
-    <img src="https://github.com/simorgh1/terraform/raw/master/gcp/ce/vm/img/open-editor-cloud-shell.jpg">
-</div>
+![IMAGE](https://github.com/simorgh1/terraform/raw/master/gcp/ce/vm/img/open-editor-cloud-shell.jpg)
 
 Now you could continue in the editor to create the required terraform configuration file. 
 Create a new file named instance.tf and add the following content into it:
 
-```json
+```javascript
 resource "google_compute_instance" "default" {
   project      = "<your project id>"
   name         = "terraform"
